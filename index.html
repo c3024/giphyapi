@@ -4,33 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>GIPHY</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="searchbox">
         <label for="category">Category</label>
-        <input id="example" type="text" aria-placeholder="Search for a gif">
+        <input id="category" type="text" aria-placeholder="Search for a gif">
     </div>
     <div class="imagearea">
-        <input id="newimage" type="submit" value="Click me for an image">
-        <img src="#">
+        <!--<input id="newimage" type="submit" value="Click me for an image"> -->
+        <button class="newimage">Click me for a gif</button>
+        <img id="illustration" src="./illustration3.jpg">
     </div>
     
     <script>
-        document.querySelector('#newimage').addEventListener('click', () => {
-            const imgCategory = document.querySelector('#newimage').innerText;
+        const imgCategory = document.querySelector('#category').value || 'dog';
+        document.querySelector('.newimage').addEventListener('click', fn(imgCategory));
+        function fn(imgCategory) {
             console.log(imgCategory);
             const img = document.querySelector('img');
-            fetch('https://api.giphy.com/v1/gifs/translate?api_key=8Fi8qF08T12cQVGtOeIDCDoaMIjb5s0w&s=cats', {mode: 'cors'})
+            const link = 'https://api.giphy.com/v1/gifs/translate?api_key=8Fi8qF08T12cQVGtOeIDCDoaMIjb5s0w&s=' + imgCategory;
+            fetch(link, {mode: 'cors'})
             .then(function(response) {
                 return response.json();
             })
             .then(function(response) {
                 //console.log(response);
                 img.src = response.data.images.original.url;
+            })
+            .catch(function(e) {
+                console.log(e);
             });
-        })
+        }       
     </script>
 </body>
 </html>
