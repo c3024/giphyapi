@@ -22,8 +22,8 @@
         document.querySelector('.newimage').addEventListener('click', () => {
             let imgCategory = document.querySelector('#category').value;
             console.log(imgCategory);
-            const img = document.querySelector('img');
-            const link = 'https://api.giphy.com/v1/gifs/translate?api_key=8Fi8qF08T12cQVGtOeIDCDoaMIjb5s0w&s=' + imgCategory;
+            let img = document.querySelector('img');
+            let link = 'https://api.giphy.com/v1/gifs/translate?api_key=8Fi8qF08T12cQVGtOeIDCDoaMIjb5s0w&s=' + imgCategory;
             fetch(link, {mode: 'cors'})
             .then(function(response) {
                 return response.json();
